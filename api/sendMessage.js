@@ -3,8 +3,6 @@ const { v4: uuid } = require("uuid");
 
 const topicName = "my-topic";
 
-// Imports the Google Cloud client library
-
 // Creates a client; cache this for further use
 const pubSubClient = new PubSub();
 
@@ -16,8 +14,16 @@ exports.publishMessage = async (id) => {
   try {
     const messageId = await pubSubClient.topic(topicName).publish(dataBuffer);
     console.log(`Message ${messageId} published.`);
+    return {
+      status: "success",
+      id: messageId,
+    };
   } catch (error) {
     console.error(`Received error while publishing: ${error.message}`);
+    return {
+      status: "failure",
+      error,
+    };
     process.exitCode = 1;
   }
 };

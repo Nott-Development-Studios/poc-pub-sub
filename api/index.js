@@ -3,9 +3,7 @@ const cors = require("cors");
 const { v4: uuid } = require("uuid");
 const { publishMessage } = require("./sendMessage");
 
-// set session variable to the gcp-data.json file.
-// get file path using ```realpath file.json```
-// export GOOGLE_APPLICATION_CREDENTIALS="/Users/robert.moritz/Documents/poc-pub-sub/api/gcp-data.json"
+require("dotenv").config();
 
 const app = express();
 const port = 4000;
@@ -15,10 +13,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
   const id = uuid();
-  publishMessage(id);
-  res.send({ message: "Hello world!", id });
+  const publish = await publishMessage(id);
+  res.send({ response: publish, id });
 });
 
 app.listen(port, () => {

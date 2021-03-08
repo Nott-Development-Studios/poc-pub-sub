@@ -21,8 +21,15 @@ const Home = () => {
       <main>
         <button onClick={sendMessage}>Send Message</button>
         <hr />
-        <code style={{ padding: "0.5rem", backgroundColor: "#eee" }}>
-          {JSON.stringify(data, null, "\t")}
+        <code
+          style={{
+            padding: "0.5rem",
+            backgroundColor: "#eee",
+            display: "block",
+            whiteSpace: "break-spaces",
+          }}
+        >
+          {JSON.stringify(data, null, "  ")}
         </code>
       </main>
     </>
