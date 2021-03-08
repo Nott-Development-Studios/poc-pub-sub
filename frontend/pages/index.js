@@ -3,8 +3,8 @@ import { useState } from "react";
 
 const Home = () => {
   const [data, setData] = useState();
+
   const sendMessage = () => {
-    console.log("CLICKED!");
     fetch("http://localhost:4000/")
       .then((response) => response.json())
       .then((data) => {
